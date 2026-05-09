@@ -1,4 +1,4 @@
-/venv
+input.txt
+output.txt
+venv
 /.vscode
-/input.txt
-/output.txt
