@@ -1,5 +1,5 @@
 def main(robots_weights, capacity_limit) -> int:
-    """Функция рассчета кол-ва платформ с Методом двух указателей"""
+    """Функция рассчета кол-ва платформ c Методом двух указателей"""
     robots_weights.sort()
     platform_count: int = 0
     left_point: int = 0
@@ -7,25 +7,21 @@ def main(robots_weights, capacity_limit) -> int:
     temp_sum: int = 0
 
     while left_point <= right_point:
+        temp_sum = robots_weights[left_point] + robots_weights[right_point]
+
         if left_point == right_point:
             platform_count += 1
             break
-
-        temp_sum = robots_weights[left_point] + robots_weights[right_point]
-        if robots_weights[right_point] == capacity_limit:
+        elif (
+                robots_weights[right_point] == capacity_limit or
+                temp_sum > capacity_limit
+        ):
             platform_count += 1
             right_point -= 1
-        elif temp_sum > capacity_limit:
+        elif temp_sum <= capacity_limit:
             platform_count += 1
-            right_point -= 1
-        elif temp_sum == capacity_limit:
-            platform_count += 1
-            right_point -= 1
             left_point += 1
-            temp_sum = 0
-        elif temp_sum < capacity_limit:
-            left_point += 1
-            # right_point -= 1
+            right_point -= 1
 
     return platform_count
 
